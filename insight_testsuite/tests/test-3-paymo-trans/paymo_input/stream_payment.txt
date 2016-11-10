@@ -1,0 +1,3 @@
+time, id1, id2, amount, message
+2016-11-02 09:38:53, 74050, 451409, 36.92, Best hair stylist on the west coast... And rent,,,sjjkdhkiijnjd
+..,,,,///jkdkldldl,…./ko,,,,,,,,
