@@ -14,7 +14,8 @@ import java.util.LinkedList;
 /**
  * @author Huijuan Zou
  * The class AntiFraud is built to analyze whether a transaction is safe or not based on previous
- * transactions. According to different degree of connection, 
+ * transactions. According to the maximum allowed degree of connection, a transaction is classified as trusted
+ * or unverified.
  */
 public class AntiFraud {
   private HashMap<String, HashSet<String>> adjacentLists;
@@ -39,7 +40,7 @@ public class AntiFraud {
 
   /**
    * @param input input file path of source data (completed transactions) to help 
-   *        in classifying ongoing transaction as trusted or unverified.
+   *         classify ongoing transaction as trusted or unverified.
    */
   public void parseInput(String input) {
     BufferedReader reader = getReader(input);
@@ -95,10 +96,10 @@ public class AntiFraud {
 
   /**
    * @param root the first id of the two ids related in an transaction to be classified.
-   * @param queue queue to help in performing BFS search.
-   * @param edges edges to help in performing BFS search.
-   * @param degree max degree allowed to be classified as trusted.
-   * @param target the second id of the two ids related in an transaction to be classified.
+   * @param queue stores first id of the two ids related in a transaction.
+   * @param edges store two ids related in a transaction and a corresponding shortest path.
+   * @param degree maximun degree allowed for a transaction to be classified as trusted.
+   * @param target the second id of the two ids related in a transaction to be classified.
    * @return boolean value indicating whether the transaction is trusted.
    */
   public boolean BFS(String root, LinkedList<String> queue,HashMap<Tuple, Integer> edges, int degree, String target) {
@@ -133,10 +134,10 @@ public class AntiFraud {
   }
 
   /**
-   * Initialize input and output file. Loop through all the client ids,
-   * write to file the result to indicate whether a transaction is trusted 
-   * by calling BFS.
-   * @param degree maximum degree allowed to classify a safe transaction.
+   * Parsing input and output file. Looping through all the client ids,
+   * writing to output file the result to indicate whether a transaction is trusted
+   * by calling BFS to calculate shortest path between two ids.
+   * @param degree maximum degree allowed to classify a transaction as trusted.
    * @param fileName output file name or file path.
    * @param input input file path
    */
@@ -210,8 +211,8 @@ public class AntiFraud {
   }
 
   /**
-   * output boolean value indicating whether a transaction is safe assuming only first degree 
-   * connection is safe.
+   * output boolean value indicating whether a transaction is trusted assuming only the first degree
+   * connection is trusted.
    * @param input path of input file to be analyzed
    */
     public void getFeature1(String input, String output) {
@@ -219,8 +220,8 @@ public class AntiFraud {
   }
   
   /**
-   * output boolean value indicating whether a transaction is safe assuming only first two 
-   * degree connections are safe.
+   * output boolean value indicating whether a transaction is trusted assuming only first two
+   * degree connections are trusted.
    * @param input path of input file to be analyzed
    */
   public void getFeature2(String input,String output) {
@@ -228,8 +229,8 @@ public class AntiFraud {
   }
   
   /**
-   * output boolean value indicating whether a transaction is safe assuming only first four 
-   * degree connections are safe.
+   * output boolean value indicating whether a transaction is trusted assuming only first four
+   * degree connections are trusted.
    * @param input path of input file to be analyzed
    */
   public void getFeature3(String input,String output) {
@@ -237,7 +238,7 @@ public class AntiFraud {
   }
   
   /**
-   * possible connection of two clients.
+   * possible connection between two clients.
    * id is unique for each client.
    * @id1 id of client one 
    * @id2 id of client two
